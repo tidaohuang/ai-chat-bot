@@ -5,7 +5,7 @@ import { useChatContext } from "./providers/ChatContextProvider";
 
 export default function ChatRoom() {
 
-    const { 
+    const {
         loading,
         message, setMessage,
         messages,
@@ -85,7 +85,7 @@ export default function ChatRoom() {
                                 {jsonData && (
                                     <div>
                                         <h2 className="font-bold">Uploaded JSON Data:</h2>
-                                        <pre className="bg-gray-100 p-4 rounded" 
+                                        <pre className="bg-gray-100 p-4 rounded"
                                             style={{ width: '450px', overflow: 'auto' }}>{JSON.stringify(jsonData, null, 2)}</pre>
                                     </div>
                                 )}
@@ -120,7 +120,10 @@ export default function ChatRoom() {
                         type="text"
                         placeholder="Type a message..."
                         className="border border-gray-300 p-3 rounded-l-lg w-full"
-                        onChange={(e) => setMessage(e.target.value)}
+                        onChange={(e) => {
+                            const prompt = 'PUT_YOUR_PROMPT_HERE';
+                            setMessage(`${prompt}: ${e.target.value}`);
+                        }}
                         onKeyDown={handleKeyDown}
                         value={message}
                     />
