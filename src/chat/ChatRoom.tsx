@@ -3,6 +3,9 @@ import Message from "./components/Message";
 import LoadingDots from "./components/LoadingDots";
 import { useChatContext } from "./providers/ChatContextProvider";
 
+const pre_prompt = '';
+const post_prompt = ' 請盡量解釋詳細，讓我能更好的了解';
+
 export default function ChatRoom() {
 
     const {
@@ -45,7 +48,7 @@ export default function ChatRoom() {
     const handleKeyDown = (event: React.KeyboardEvent) => {
         if (event.key === 'Enter') {
             event.preventDefault();
-            handleSend(message);
+            handleSend(message, `${pre_prompt}${message}${post_prompt}`);
         }
     };
 
@@ -104,7 +107,7 @@ export default function ChatRoom() {
                         {messages.map((m, index) => (
                             <Message key={index}
                                 message={m.content}
-                                fromAi={m.role === 'system'}
+                                fromAi={m.role === 'assistant'}
                             />
                         ))}
 
@@ -120,14 +123,13 @@ export default function ChatRoom() {
                         type="text"
                         placeholder="Type a message..."
                         className="border border-gray-300 p-3 rounded-l-lg w-full"
-                        onChange={(e) => {
-                            const prompt = 'PUT_YOUR_PROMPT_HERE';
-                            setMessage(`${prompt}: ${e.target.value}`);
-                        }}
+                        onChange={(e) => setMessage(e.target.value)}
                         onKeyDown={handleKeyDown}
                         value={message}
                     />
-                    <button className="bg-blue-500 text-white p-3 rounded-r-lg" onClick={() => handleSend(message)}>
+                    <button className="bg-blue-500 text-white p-3 rounded-r-lg" onClick={() => {
+                        handleSend(message, `${pre_prompt}${message}${post_prompt}`);
+                    }}>
                         Send
                     </button>
                 </div>

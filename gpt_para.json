@@ -1,0 +1,15 @@
+{
+  "model": "gpt-4o",
+  "messages": [
+    {
+      "role": "system",
+      "content": "你是一位專業的英文老師，並且很擅長教導學生。我是一位高中生，有幾個英文題目我不太懂，需要你的指導以及詳細解析每個選項，循序漸進教導我了解這些題目。"
+    }
+  ],
+  "frequency_penalty":0.0,
+  "max_completion_tokens":10000,
+  "n":1,
+  "presence_penalty":0.0,
+  "temperature":1.0,
+  "top_p":1.0
+}

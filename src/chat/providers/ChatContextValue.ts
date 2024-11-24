@@ -1,5 +1,5 @@
 export type ChatMessage = {
-    role: 'user' | 'system',
+    role: 'user' | 'system' | 'assistant',
     content: string
 }
 
@@ -24,5 +24,5 @@ export interface ChatContextValue {
     setError: React.Dispatch<React.SetStateAction<string | null>>;
 
     // 
-    handleSend: (message: string) => void
+    handleSend: (userMessage: string, promptMessage: string) => void;
 }
