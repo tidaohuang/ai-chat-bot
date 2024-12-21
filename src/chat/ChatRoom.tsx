@@ -4,7 +4,8 @@ import LoadingDots from "./components/LoadingDots";
 import { useChatContext } from "./providers/ChatContextProvider";
 
 const pre_prompt = '';
-const post_prompt = ' 請盡量解釋詳細，讓我能更好的了解';
+// const post_prompt = '  請不要一次性給出解答，一步一步引導我解出這題，盡量解釋詳細，讓我能更好的了解';
+const post_prompt = '';
 
 export default function ChatRoom() {
 
@@ -45,8 +46,11 @@ export default function ChatRoom() {
         setSettingsOpen(!settingsOpen);
     };
 
-    const handleKeyDown = (event: React.KeyboardEvent) => {
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
         if (event.key === 'Enter') {
+            if (event.shiftKey) {
+                return; // Allow line break with Shift+Enter
+            }
             event.preventDefault();
             handleSend(message, `${pre_prompt}${message}${post_prompt}`);
         }
@@ -106,7 +110,7 @@ export default function ChatRoom() {
 
                         {messages.map((m, index) => (
                             <Message key={index}
-                                message={m.content}
+                                message={m.content.find(item => item.type === 'text')?.text || ''}
                                 fromAi={m.role === 'assistant'}
                             />
                         ))}
@@ -119,11 +123,16 @@ export default function ChatRoom() {
                     </div>
                 </div>
                 <div className="mt-4 flex">
-                    <input
-                        type="text"
+                    <textarea
                         placeholder="Type a message..."
-                        className="border border-gray-300 p-3 rounded-l-lg w-full"
-                        onChange={(e) => setMessage(e.target.value)}
+                        className="border border-gray-300 p-3 rounded-l-lg w-full resize-none"
+                        style={{ maxHeight: '200px' }}
+                        rows={1}
+                        onChange={(e) => {
+                            e.target.style.height = 'auto';
+                            e.target.style.height = e.target.scrollHeight + 'px';
+                            setMessage(e.target.value);
+                        }}
                         onKeyDown={handleKeyDown}
                         value={message}
                     />

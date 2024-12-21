@@ -1,6 +1,6 @@
 export type ChatMessage = {
     role: 'user' | 'system' | 'assistant',
-    content: string
+    content: Array<{[key: string]: string}>
 }
 
 export interface ChatContextValue {

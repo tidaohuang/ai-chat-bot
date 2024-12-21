@@ -1,0 +1,14 @@
+1. 開啟cmd，移至 ai-chat-bot/
+2. firebase login (登入google帳號)
+3. firebase init
+4. Are you ready to proceed? Yes
+5. Which Firebase features do you want to set up for this directory? Press Space to select features, then Enter to
+confirm your choices. 
+Hosting: Configure files for Firebase Hosting and (optionally) set up GitHub Action deploys
+6. Please select an option: Use an existing project
+7. Select a default Firebase project for this directory: cyvisionbot (cyvisionbot)
+8. What do you want to use as your public directory? dist
+9. Configure as a single-page app (rewrite all urls to /index.html)? Yes
+10. Set up automatic builds and deploys with GitHub? No
+11. npm run build
+12. firebase deploy

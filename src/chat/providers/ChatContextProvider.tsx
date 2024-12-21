@@ -42,7 +42,7 @@ export default function ChatContextProvider({ children }: ChatContextProviderPro
         // combine message
         const updatedMessages: ChatMessage[] = [...messages, {
             role: 'user',
-            content: userMessage
+            content: [{ type:"text", text: userMessage }]
         }]
         console.log("updatedMessages", JSON.stringify(updatedMessages, null, 2));
 
@@ -61,7 +61,7 @@ export default function ChatContextProvider({ children }: ChatContextProviderPro
         // }];
         object['messages'].push({
             role: 'user',
-            content: promptMessage
+            content: [{ type:"text", text: promptMessage }]
         });
 
         console.log("object after modification", JSON.stringify(object, null, 2));
@@ -74,11 +74,11 @@ export default function ChatContextProvider({ children }: ChatContextProviderPro
                     const reply = response.choices[0].message.content;
                     const repliedMessages: ChatMessage[] = [...updatedMessages, {
                         role: 'assistant',
-                        content: reply
+                        content: [{ type:"text", text: reply }]
                     }]
                     object['messages'].push({
                         role: 'assistant',
-                        content: reply
+                        content: [{ type:"text", text: reply }]
                     });
                     setMessages(repliedMessages);
                 }
